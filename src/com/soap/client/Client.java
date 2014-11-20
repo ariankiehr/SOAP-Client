@@ -21,8 +21,31 @@ public class Client {
 			e.printStackTrace();
 		}
 		
+		HashServiceStub.BreakHashE bhe = new HashServiceStub.BreakHashE();
+		HashServiceStub.BreakHash bh =  new HashServiceStub.BreakHash();
+		HashServiceStub.BreakHashResponseE bhre = new HashServiceStub.BreakHashResponseE();
 		
-		HashServiceStub.GetMD5E gmd5e = new HashServiceStub.GetMD5E();
+		HashServiceStub.HashToBreak htb = new HashServiceStub.HashToBreak();
+		
+		htb.setHash( "f1c1592588411002af340cbaedd6fc33" );
+		htb.setType( HashServiceStub.EnumType.MD5);
+		htb.setTimeout(1000);
+		
+		
+		bh.setArg0(htb);
+		bhe.setBreakHash(bh);
+		
+		try {
+			bhre = hstub.breakHash(bhe);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println( bhre.getBreakHashResponse().get_return() );
+		
+		
+		
+		/*HashServiceStub.GetMD5E gmd5e = new HashServiceStub.GetMD5E();
 		HashServiceStub.GetMD5 gmd5 = new HashServiceStub.GetMD5();
 		
 		HashServiceStub.GetMD5ResponseE gmd5re = new HashServiceStub.GetMD5ResponseE();
@@ -37,11 +60,11 @@ public class Client {
 			e.printStackTrace();
 		}
 		
-		System.out.println( gmd5re.getGetMD5Response().get_return() );
+		System.out.println( gmd5re.getGetMD5Response().get_return() );*/
 		
 		
 		
-		MailServiceStub mstub = null;
+		/*MailServiceStub mstub = null;
 		
 		try {
 			mstub = new MailServiceStub();
@@ -53,8 +76,6 @@ public class Client {
 		MailServiceStub.ValidateMailAddress vemail = new MailServiceStub.ValidateMailAddress();
 		
 		MailServiceStub.ValidateMailAddressResponseE vemailre = new MailServiceStub.ValidateMailAddressResponseE();
-		
-		MailServiceStub.SendMailInfo asd = new MailServiceStub.SendMailInfo();
 		
 		vemail.setArg0( "ariankiehr@gmail.com" );
 		vemaile.setValidateMailAddress(vemail);
@@ -71,7 +92,7 @@ public class Client {
 			TextServiceStub tstub = new TextServiceStub();
 		} catch (AxisFault e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 		
 	}
